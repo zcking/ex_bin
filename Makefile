@@ -1,5 +1,5 @@
 test:
-	mix test --color --cover
+	mix test --color --cover --trace
 
 build:
 	mix compile
