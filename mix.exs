@@ -11,7 +11,8 @@ defmodule ExBin.MixProject do
 
       # Docs
       name: "ExBin",
-      package: package()
+      package: package(),
+      source_url: "https://github.com/zcking/ex_bin"
     ]
   end
 
