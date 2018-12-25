@@ -1,10 +1,12 @@
 # ExBin
 
-**TODO: Add description**
+[![Build Status](https://travis-ci.com/zcking/ex_bin.svg?branch=master)](https://travis-ci.com/zcking/ex_bin)  
+
+Binary helpers for dealing with bits and bytes in Elixir.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
+[Available in Hex](https://hex.pm/docs/publish), so the package can be installed
 by adding `ex_bin` to your list of dependencies in `mix.exs`:
 
 ```elixir
