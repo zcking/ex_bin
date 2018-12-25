@@ -7,7 +7,11 @@ defmodule ExBin.MixProject do
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "ExBin",
+      package: package()
     ]
   end
 
@@ -21,8 +25,16 @@ defmodule ExBin.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
+    ]
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README.md", "LICENSE"],
+      maintainers: ["Zachary King"],
+      licenses: ["MIT"],
+      links: %{"Github" => "https://github.com/zcking/ex_bin"}
     ]
   end
 end
