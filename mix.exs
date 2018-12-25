@@ -12,7 +12,8 @@ defmodule ExBin.MixProject do
       # Docs
       name: "ExBin",
       package: package(),
-      source_url: "https://github.com/zcking/ex_bin"
+      source_url: "https://github.com/zcking/ex_bin",
+      description: description()
     ]
   end
 
@@ -37,5 +38,9 @@ defmodule ExBin.MixProject do
       licenses: ["MIT"],
       links: %{"Github" => "https://github.com/zcking/ex_bin"}
     ]
+  end
+
+  defp description do
+    "Binary helpers for dealing with bits and bytes in Elixir."
   end
 end
