@@ -50,4 +50,26 @@ defmodule ExBinTest do
              0x01
            ]
   end
+
+  test "bits works on bitstring even if it is not a binary" do
+    bitstr = <<3::size(2)>>
+    assert ExBin.bits(bitstr) == [1, 1]
+  end
+
+  test "bit_at fetches the bit at specified index" do
+    bitstr = <<0b1011011::size(7)>>
+    assert ExBin.bit_at(bitstr, 0) == 1
+    assert ExBin.bit_at(bitstr, 1) == 0
+    assert ExBin.bit_at(bitstr, 2) == 1
+    assert ExBin.bit_at(bitstr, 3) == 1
+    assert ExBin.bit_at(bitstr, 4) == 0
+    assert ExBin.bit_at(bitstr, 5) == 1
+    assert ExBin.bit_at(bitstr, 6) == 1
+  end
+
+  test "bit_at works on really large bitstring" do
+    # 500,000,000 bits
+    large_bitstr = String.duplicate(<<0b10101>>, 100_000_000)
+    assert ExBin.bit_at(large_bitstr, 499_999_999) == 1
+  end
 end
