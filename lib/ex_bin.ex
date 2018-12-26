@@ -44,6 +44,15 @@ defmodule ExBin do
 
   If the binary is empty, or already exhausted, byte_at will
   return `{:error, :index_out_of_bounds}`.
+
+  ## Examples
+
+      iex> ExBin.byte_at(<<0x0b, 0xc4, 0x3f>>, 1)
+      196
+
+      iex> ExBin.byte_at(<<0x0b, 0xc4, 0x3f>>, 7)
+      {:error, :index_out_of_bounds}
+
   """
   def byte_at(binary, index) when is_binary(binary) and index > 0 do
     <<_>> <> binary = binary
@@ -55,8 +64,8 @@ defmodule ExBin do
 
   ## Examples:
 
-    iex> ExBin.bits(<<0xa5, 0x93>>)
-    [1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1]
+      iex> ExBin.bits(<<0xa5, 0x93>>)
+      [1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1]
 
   """
   def bits(bitstr) when is_bitstring(bitstr) do
@@ -74,8 +83,8 @@ defmodule ExBin do
 
   ## Examples
 
-    iex> ExBin.bit_stream(<<0xa5,0x93>>) |> Enum.take(16)
-    [1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1]
+      iex> ExBin.bit_stream(<<0xa5,0x93>>) |> Enum.take(16)
+      [1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1]
 
   """
   def bit_stream(bitstr) when is_bitstring(bitstr) do
@@ -107,9 +116,23 @@ defmodule ExBin do
   @doc """
   Returns the bit at a specific index. If the index exceeds the length
   of the bitstring, `{:error, :index_out_of_bounds}` is returned.
+
+  ## Examples
+
+      iex> ExBin.bit_at(<<0b1011 :: size(4)>>, 2)
+      1
+
+      iex> ExBin.bit_at(<<0b1011 :: size(4)>>, 10)
+      {:error, :index_out_of_bounds}
+
   """
   def bit_at(bitstr, index) when is_bitstring(bitstr) and index > 0 do
-    <<_::size(index), result::size(1), _::bitstring>> = bitstr
-    result
+    try do
+      <<_::size(index), result::size(1), _::bitstring>> = bitstr
+      result
+    rescue
+      _ in MatchError ->
+        {:error, :index_out_of_bounds}
+    end
   end
 end
