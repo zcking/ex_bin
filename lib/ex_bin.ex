@@ -55,8 +55,14 @@ defmodule ExBin do
 
   """
   def byte_at(binary, index) when is_binary(binary) and index > 0 do
-    <<_>> <> binary = binary
-    byte_at(binary, index - 1)
+    try do
+      ignored = index * 8
+      <<_::size(ignored), target::size(8), _::binary>> = binary
+      target
+    rescue
+      _ in MatchError ->
+        {:error, :index_out_of_bounds}
+    end
   end
 
   @doc """
