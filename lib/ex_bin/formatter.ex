@@ -1,6 +1,4 @@
 defmodule ExBin.Formatter do
-  @moduledoc false
-
   @doc """
   Pretty print a given `binary`. By default this will output
   in the same format as `hexdump <file>` from BSD general commands.
