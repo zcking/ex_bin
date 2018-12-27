@@ -1,5 +1,8 @@
 test:
-	mix test --color --cover --trace
+	MIX_ENV=test mix coveralls
+
+coverage:
+	MIX_ENV=test mix coveralls.html
 
 build:
 	mix compile
