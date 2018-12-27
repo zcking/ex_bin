@@ -1,6 +1,8 @@
 # ExBin
 
-[![Build Status](https://travis-ci.com/zcking/ex_bin.svg?branch=master)](https://travis-ci.com/zcking/ex_bin)  
+[![Build Status](https://travis-ci.com/zcking/ex_bin.svg?branch=master)](https://travis-ci.com/zcking/ex_bin)
+[![Coverage Status](https://coveralls.io/repos/github/zcking/ex_bin/badge.svg?branch=master)](https://coveralls.io/github/zcking/ex_bin?branch=master)
+[![hex.pm version](https://img.shields.io/hexpm/v/ex_bin.svg)](https://hex.pm/packages/ex_bin)   
 
 Binary helpers for dealing with bits and bytes in Elixir.
 
