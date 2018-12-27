@@ -1,7 +1,7 @@
 defmodule ExBin.Formatter do
   @doc """
   Pretty print a given `binary`. By default this will output
-  in the same format as `hexdump <file>` from BSD general commands.
+  in the same format as `hexdump -C <file>` from BSD general commands.
   This function returns a string, so you aren't bound to any certain
   I/O mechanism (i.e. you may not want to print this to stdout, so `IO.puts/1` is not used).
 
