@@ -14,7 +14,7 @@ by adding `ex_bin` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:ex_bin, "~> 0.2.1"}
+    {:ex_bin, "~> 0.2.2"}
   ]
 end
 ```
