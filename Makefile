@@ -10,4 +10,7 @@ build:
 docs:
 	mix docs
 
+publish:
+	mix hex.publish
+
 .PHONY: test build docs
