@@ -72,4 +72,17 @@ defmodule ExBinTest do
     large_bitstr = String.duplicate(<<0b10101>>, 100_000_000)
     assert ExBin.bit_at(large_bitstr, 499_999_999) == 1
   end
+
+  test "bit_slice has inclusive start and exclusive end" do
+    assert ExBin.bit_slice(<<0b10011::5>>, 1..4) == <<0b001::3>>
+  end
+
+  test "bit_slice works with range exceeding length of bitstring" do
+    assert ExBin.bit_slice(<<0b10101::5>>, 2..10) == <<0b101::3>>
+  end
+
+  test "bit_slice works on really large bitstrings" do
+    large_bitstr = String.duplicate(<<0b10101>>, 100_000_000)
+    assert ExBin.bit_slice(large_bitstr, 99_999_995..100_000_000) == <<0b10101::5>>
+  end
 end

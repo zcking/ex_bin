@@ -141,4 +141,36 @@ defmodule ExBin do
         {:error, :index_out_of_bounds}
     end
   end
+
+  @doc """
+  Returns a "slice" of bits from a given bitstring,
+  from `range.first` (inclusive) to `range.last` (exclusive).
+
+  If the range exceeds the length of the bitstring,
+  the bits from `range.first` to the end of the bitstring
+  will be returned.
+
+  ## Examples
+
+      iex> ExBin.bit_slice(<<0b10101::5>>, 0..3)
+      <<5::size(3)>>
+
+      iex> ExBin.bit_slice(<<0b10101::5>>, 2..10)
+      <<5::size(3)>>
+
+  """
+  def bit_slice(bitstr, range) when is_bitstring(bitstr) do
+    to = range.last
+    from = range.first
+    dist = to - from
+
+    try do
+      <<_::size(from), res::size(dist), _::bitstring>> = bitstr
+      <<res::size(dist)>>
+    rescue
+      _ in MatchError ->
+        <<_::size(from), res::bitstring>> = bitstr
+        res
+    end
+  end
 end
