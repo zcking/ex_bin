@@ -98,4 +98,41 @@ defmodule ExBin.Formatter do
     end)
     |> Enum.join("\n")
   end
+
+  @doc """
+  Formats a bitstring into a string of ones and zeroes.
+
+  `opts` allows you to optionally set some style settings.
+  Currently, only one is supported:
+    - `:spacer` - if `true`, this will insert a space between each set of 8 bits; defaults to `false`.
+
+
+  ## Examples
+
+      iex> ExBin.Formatter.format_bits(<<0b1011011100010101::16>>)
+      "1011011100010101"
+
+      iex> ExBin.Formatter.format_bits(<<0b1011011100010101::16>>, spacer: true)
+      "10110111 00010101"
+
+  """
+  def format_bits(bitstr, opts \\ []) when is_bitstring(bitstr) do
+    add_spacer =
+      case Keyword.fetch(opts, :spacer) do
+        {:ok, true} -> true
+        _ -> false
+      end
+
+    bits = ExBin.bit_stream(bitstr)
+
+    if add_spacer do
+      bits
+      |> Enum.chunk_every(8)
+      |> Enum.map(&Enum.join/1)
+      |> Enum.join(" ")
+    else
+      bits
+      |> Enum.join()
+    end
+  end
 end
