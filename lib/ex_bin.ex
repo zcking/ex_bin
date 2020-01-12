@@ -173,4 +173,33 @@ defmodule ExBin do
         res
     end
   end
+
+  @doc """
+  Calculates the parity bit value of a given bitstring.
+  Defaults to a even parity bit type which results in 0
+  if the number of 1's in the bitstring are even.
+
+  For odd parity bit type, set `is_even` to `false`;
+  this will result in the inverse behavior.
+
+  ## Examples
+
+      iex> ExBin.parity(<<0b1001::4>>, true)
+      0
+
+      iex> ExBin.parity(<<0b1001::4>>, false)
+      1
+
+  """
+  @spec parity(bitstring, boolean) :: 0 | 1
+  def parity(bitstr, is_even \\ true) do
+    parity_bit = bit_stream(bitstr)
+    |> Enum.count(&(&1 == 1))
+    |> rem(2)
+
+    case {is_even, parity_bit} do
+      {true, bit} -> bit
+      {false, bit} -> (bit * -1) + 1
+    end
+  end
 end
