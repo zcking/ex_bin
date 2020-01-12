@@ -202,4 +202,22 @@ defmodule ExBin do
       {false, bit} -> (bit * -1) + 1
     end
   end
+
+  @doc """
+  Splits a bitstring into chunks of `chunk_size` bits each.
+
+  ## Examples
+
+      iex> ExBin.chunks(<<0b1011000101111::size(13)>>, 3) |> Enum.to_list
+      [[1, 0, 1], [1, 0, 0], [0, 1, 0], [1, 1, 1], [1]]
+
+      iex> ExBin.chunks(<<0b10010111::size(8)>>, 4) |> Enum.to_list
+      [[1, 0, 0, 1], [0, 1, 1, 1]]
+
+  """
+  @spec chunks(bitstring, pos_integer) :: Enumerable.t()
+  def chunks(bitstr, chunk_size) when is_bitstring(bitstr) and is_number(chunk_size) and chunk_size > 0 do
+    bit_stream(bitstr)
+    |> Stream.chunk_every(chunk_size)
+  end
 end
